@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace TejMonoIntro
 {
@@ -19,7 +20,7 @@ namespace TejMonoIntro
         Vector2 rightPaddlePosition;
         Color tint;
         Color rightPaddleTint;
-        Color leftPaddleTint; 
+        Color leftPaddleTint;
         int speedX;
         int speedY;
         int rightPaddleSpeedY;
@@ -60,7 +61,7 @@ namespace TejMonoIntro
             leftPaddlePosition = new Vector2(0, 140);
             leftPaddleTint = Color.Red;
             rightPaddleTexture = Content.Load<Texture2D>("PongPaddleMonogame");
-            rightPaddlePosition = new Vector2(GraphicsDevice.Viewport.Width - 16,140);
+            rightPaddlePosition = new Vector2(GraphicsDevice.Viewport.Width - 16, 140);
             rightPaddleTint = Color.Red;
             speedX = 5;
             speedY = 5;
@@ -87,9 +88,15 @@ namespace TejMonoIntro
         {
             ks = Keyboard.GetState();
             position.X += speedX;
-            if (position.X + texture.Width>= GraphicsDevice.Viewport.Width || position.X <= 0)
+            // Right side
+            if (position.X + texture.Width >= rightPaddlePosition.X && position.Y + texture.Height >= rightPaddlePosition.Y && position.Y <= rightPaddlePosition.Y + rightPaddleTexture.Height)
             {
-                speedX *= -1;
+                speedX = -Math.Abs(speedX);
+            }
+            // Left side
+            if (/*right side of paddle*/position.X <= leftPaddlePosition.X + leftPaddleTexture.Width && /*bottom of paddle*/position.Y <= leftPaddlePosition.Y + leftPaddleTexture.Height && /*top of paddle*/position.Y + texture.Height >= leftPaddlePosition.Y)
+            {
+                speedX = Math.Abs(speedX);
             }
             position.Y += speedY;
             if (position.Y + texture.Height >= GraphicsDevice.Viewport.Height || position.Y <= 0)
@@ -103,7 +110,7 @@ namespace TejMonoIntro
             }
             if (ks.IsKeyDown(Keys.Up) && leftPaddlePosition.Y >= 0)
             {
-                leftPaddlePosition.Y-= leftPaddleSpeedY;
+                leftPaddlePosition.Y -= leftPaddleSpeedY;
             }
             if (ks.IsKeyDown(Keys.Down) && leftPaddlePosition.Y + leftPaddleTexture.Height < GraphicsDevice.Viewport.Height)
             {

@@ -24,3 +24,29 @@ c:\users\visitordl9\documents\visual studio 2015\Projects\TejMonoIntro\TejMonoIn
 c:\users\visitordl9\documents\visual studio 2015\Projects\TejMonoIntro\TejMonoIntro\bin\Windows\x86\Debug\Content\lolol.xnb
 c:\users\visitordl9\documents\visual studio 2015\Projects\TejMonoIntro\TejMonoIntro\bin\Windows\x86\Debug\Content\BlueBall.xnb
 c:\users\visitordl9\documents\visual studio 2015\Projects\TejMonoIntro\TejMonoIntro\bin\Windows\x86\Debug\Content\PongPaddleMonogame.xnb
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\bin\Windows\x86\Debug\Content\BlueBall.xnb
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\bin\Windows\x86\Debug\Content\lolol.xnb
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\bin\Windows\x86\Debug\Content\PongPaddleMonogame.xnb
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\bin\Windows\x86\Debug\TejMonoIntro.exe
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\bin\Windows\x86\Debug\TejMonoIntro.pdb
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\bin\Windows\x86\Debug\MonoGame.Framework.dll
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\bin\Windows\x86\Debug\SharpDX.dll
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\bin\Windows\x86\Debug\SharpDX.XInput.dll
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\bin\Windows\x86\Debug\MonoGame.Framework.xml
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\bin\Windows\x86\Debug\SharpDX.xml
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\bin\Windows\x86\Debug\SharpDX.XInput.xml
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\obj\x86\Debug\TejMonoIntro.csprojResolveAssemblyReference.cache
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\obj\x86\Debug\TejMonoIntro.exe
+C:\Users\TejBhasin\Documents\Github\MonoGamePong\TejMonoIntro\obj\x86\Debug\TejMonoIntro.pdb

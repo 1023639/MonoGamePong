@@ -4,8 +4,8 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/VisitorDL9/Documents/Visual Studio 2015/Projects/TejMonoIntro/TejMonoIntro/Content/lolol.jpg</File>
-    <File>C:/Users/VisitorDL9/Documents/Visual Studio 2015/Projects/TejMonoIntro/TejMonoIntro/Content/BlueBall.png</File>
-    <File>C:/Users/VisitorDL9/Documents/Visual Studio 2015/Projects/TejMonoIntro/TejMonoIntro/Content/PongPaddleMonogame.png</File>
+    <File>C:/Users/TejBhasin/Documents/Github/MonoGamePong/TejMonoIntro/Content/lolol.jpg</File>
+    <File>C:/Users/TejBhasin/Documents/Github/MonoGamePong/TejMonoIntro/Content/BlueBall.png</File>
+    <File>C:/Users/TejBhasin/Documents/Github/MonoGamePong/TejMonoIntro/Content/PongPaddleMonogame.png</File>
   </SourceFiles>
 </SourceFileCollection>
