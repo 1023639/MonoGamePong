@@ -11,22 +11,11 @@ namespace TejMonoIntro
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-        Texture2D texture;
-        Texture2D leftPaddleTexture;
-        Texture2D rightPaddleTexture;
-        Vector2 position;
-        Vector2 leftPaddlePosition;
-        Vector2 rightPaddlePosition;
-        Color tint;
-        Color rightPaddleTint;
-        Color leftPaddleTint;
-        int speedX;
-        int speedY;
-        int rightPaddleSpeedY;
-        int leftPaddleSpeedY;
+        SpriteBatch spriteBatch;   
         KeyboardState ks;
-
+        Ball ball;
+        Paddle leftPaddle;
+        Paddle rightPaddle;
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -52,14 +41,10 @@ namespace TejMonoIntro
         /// </summary>
         protected override void LoadContent()
         {
+            ball = new Ball(new Vector2(0, 0), Content.Load<Texture2D>("BlueBall"), Color.White, new Vector2(4));
+            leftPaddle = new Paddle(new Vector2(0, 140), Content.Load<Texture2D>("PongPaddleMonogame"), Color.Red, new Vector2(0, 5));
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            texture = Content.Load<Texture2D>("BlueBall");
-            position = new Vector2(0, 0);
-            tint = Color.White;
-            leftPaddleTexture = Content.Load<Texture2D>("PongPaddleMonogame");
-            leftPaddlePosition = new Vector2(0, 140);
-            leftPaddleTint = Color.Red;
+            
             rightPaddleTexture = Content.Load<Texture2D>("PongPaddleMonogame");
             rightPaddlePosition = new Vector2(GraphicsDevice.Viewport.Width - 16, 140);
             rightPaddleTint = Color.Red;
@@ -67,6 +52,10 @@ namespace TejMonoIntro
             speedY = 5;
             rightPaddleSpeedY = 5;
             leftPaddleSpeedY = 5;
+            Ballsprite = new Sprite(position, texture, tint);
+            rightPaddleSprite = new Sprite(rightPaddlePosition, rightPaddleTexture, rightPaddleTint);
+            leftPaddleSprite = new Sprite(leftPaddlePosition, leftPaddleTexture, leftPaddleTint);
+            
             // TODO: use this.Content to load your game content here
         }
 
@@ -86,17 +75,24 @@ namespace TejMonoIntro
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            ks = Keyboard.GetState();
-            position.X += speedX;
-            // Right side
-            if (position.X + texture.Width >= rightPaddlePosition.X && position.Y + texture.Height >= rightPaddlePosition.Y && position.Y <= rightPaddlePosition.Y + rightPaddleTexture.Height)
+            if (Ballsprite.hitbox.Intersects(rightPaddleSprite.hitbox))
             {
                 speedX = -Math.Abs(speedX);
             }
-            // Left side
-            if (/*right side of paddle*/position.X <= leftPaddlePosition.X + leftPaddleTexture.Width && /*bottom of paddle*/position.Y <= leftPaddlePosition.Y + leftPaddleTexture.Height && /*top of paddle*/position.Y + texture.Height >= leftPaddlePosition.Y)
+            if (Ballsprite.hitbox.Intersects(leftPaddleSprite.hitbox))
             {
                 speedX = Math.Abs(speedX);
+            }
+            
+            Ballsprite.Update(gameTime);
+            ks = Keyboard.GetState();
+            position.X += speedX;
+            // Right side
+            /// reset()
+            // Left side
+            if (position.X + texture.Width > GraphicsDevice.Viewport.Width)
+            {
+                Ballsprite.reset(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             }
             position.Y += speedY;
             if (position.Y + texture.Height >= GraphicsDevice.Viewport.Height || position.Y <= 0)
