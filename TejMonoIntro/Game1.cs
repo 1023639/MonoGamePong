@@ -11,11 +11,16 @@ namespace TejMonoIntro
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;   
+        SpriteBatch spriteBatch;
         KeyboardState ks;
         Ball ball;
         Paddle leftPaddle;
         Paddle rightPaddle;
+        bool resetBall;
+
+        int difficulty = 0;
+        //0 easy, 1 medium, 2 hard
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -41,21 +46,27 @@ namespace TejMonoIntro
         /// </summary>
         protected override void LoadContent()
         {
+
+
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            resetBall = false;
             ball = new Ball(new Vector2(0, 0), Content.Load<Texture2D>("BlueBall"), Color.White, new Vector2(4));
-            leftPaddle = new Paddle(new Vector2(0, 140), Content.Load<Texture2D>("PongPaddleMonogame"), Color.Red, new Vector2(0, 5));
+            leftPaddle = new Paddle(new Vector2(0, 140), Content.Load<Texture2D>("PongPaddleMonogame"), Color.Red, new Vector2(0, 10));
+            rightPaddle = new Paddle(new Vector2(GraphicsDevice.Viewport.Width - 16, 140), Content.Load<Texture2D>("PongPaddleMonogame"), Color.Red, new Vector2(0, 5));
             // Create a new SpriteBatch, which can be used to draw textures.
-            
-            rightPaddleTexture = Content.Load<Texture2D>("PongPaddleMonogame");
-            rightPaddlePosition = new Vector2(GraphicsDevice.Viewport.Width - 16, 140);
-            rightPaddleTint = Color.Red;
-            speedX = 5;
-            speedY = 5;
-            rightPaddleSpeedY = 5;
-            leftPaddleSpeedY = 5;
-            Ballsprite = new Sprite(position, texture, tint);
-            rightPaddleSprite = new Sprite(rightPaddlePosition, rightPaddleTexture, rightPaddleTint);
-            leftPaddleSprite = new Sprite(leftPaddlePosition, leftPaddleTexture, leftPaddleTint);
-            
+
+            if (difficulty == 0)
+            {
+                rightPaddle.speed.Y = 5;
+            }
+            if (difficulty == 1)
+            {
+                rightPaddle.speed.Y = 1.5f;
+            }
+            if (difficulty == 2)
+            {
+                rightPaddle.speed.Y = 4;
+            }
             // TODO: use this.Content to load your game content here
         }
 
@@ -75,42 +86,71 @@ namespace TejMonoIntro
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (Ballsprite.hitbox.Intersects(rightPaddleSprite.hitbox))
+            if (ball.hitbox.Intersects(rightPaddle.hitbox))
             {
-                speedX = -Math.Abs(speedX);
+                ball.speed.X *= -1;
+                resetBall = false;
             }
-            if (Ballsprite.hitbox.Intersects(leftPaddleSprite.hitbox))
+            if (ball.hitbox.Intersects(leftPaddle.hitbox))
             {
-                speedX = Math.Abs(speedX);
+                ball.speed.X *= -1;
+                resetBall = false;
             }
-            
-            Ballsprite.Update(gameTime);
+            leftPaddle.Update(gameTime);
+            rightPaddle.Update(gameTime);
+            ball.Update(gameTime);
             ks = Keyboard.GetState();
-            position.X += speedX;
+            ball.position.X += ball.speed.X;
+            ball.position.Y += ball.speed.Y;
             // Right side
             /// reset()
             // Left side
-            if (position.X + texture.Width > GraphicsDevice.Viewport.Width)
+            if (ball.position.X + ball.texture.Width > GraphicsDevice.Viewport.Width || ball.position.X < 0)
             {
-                Ballsprite.reset(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+                resetBall = true;
             }
-            position.Y += speedY;
-            if (position.Y + texture.Height >= GraphicsDevice.Viewport.Height || position.Y <= 0)
+            if (resetBall == true)
             {
-                speedY *= -1;
+                ball.reset(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+                resetBall = false;
             }
-            rightPaddlePosition.Y += rightPaddleSpeedY;
-            if (rightPaddlePosition.Y <= 0 || rightPaddlePosition.Y + rightPaddleTexture.Height >= GraphicsDevice.Viewport.Height)
+            else if (ball.position.Y + ball.texture.Height >= GraphicsDevice.Viewport.Height || ball.position.Y <= 0)
             {
-                rightPaddleSpeedY *= -1;
+                ball.speed.Y *= -1;
             }
-            if (ks.IsKeyDown(Keys.Up) && leftPaddlePosition.Y >= 0)
+            //hard difficulty
+            if (difficulty == 2)
             {
-                leftPaddlePosition.Y -= leftPaddleSpeedY;
+                rightPaddle.position.Y = ball.position.Y;
             }
-            if (ks.IsKeyDown(Keys.Down) && leftPaddlePosition.Y + leftPaddleTexture.Height < GraphicsDevice.Viewport.Height)
+            //easy difficulty
+             if (rightPaddle.position.Y <= 0 || rightPaddle.position.Y + rightPaddle.texture.Height >= GraphicsDevice.Viewport.Height && difficulty == 0)
+             {
+                 rightPaddle.speed.Y *= -1;
+             }
+
+            //medium difficulty
+
+            if (ball.position.Y + ball.texture.Height / 2 >= rightPaddle.position.Y + rightPaddle.texture.Height / 2 && difficulty ==1)
             {
-                leftPaddlePosition.Y += leftPaddleSpeedY;
+                rightPaddle.position.Y += rightPaddle.speed.Y;
+            }
+            else if (ball.position.Y / 2 <= rightPaddle.position.Y / 2)
+            {
+                rightPaddle.position.Y -= rightPaddle.speed.Y;
+            }
+            else
+            {
+                //nothing happens when the y's are equal to each other
+            }
+
+            if (ks.IsKeyDown(Keys.Up) && leftPaddle.position.Y >= 0)
+            {
+                leftPaddle.position.Y -= leftPaddle.speed.Y;
+            }
+            else if (ks.IsKeyDown(Keys.Down) && leftPaddle.position.Y + leftPaddle.texture.Height < GraphicsDevice.Viewport.Height)
+            {
+                leftPaddle.position.Y += leftPaddle.speed.Y;
             }
             //GraphicsDevice.Viewport.Height
             base.Update(gameTime);
@@ -123,11 +163,9 @@ namespace TejMonoIntro
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Ivory);
-            spriteBatch.Begin();
-            spriteBatch.Draw(texture, position, tint);
-            spriteBatch.Draw(leftPaddleTexture, leftPaddlePosition, leftPaddleTint);
-            spriteBatch.Draw(rightPaddleTexture, rightPaddlePosition, rightPaddleTint);
-            spriteBatch.End();
+            ball.Draw(spriteBatch);
+            rightPaddle.Draw(spriteBatch);
+            leftPaddle.Draw(spriteBatch);
             base.Draw(gameTime);
         }
     }

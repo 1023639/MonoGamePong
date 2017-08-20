@@ -10,10 +10,7 @@ namespace TejMonoIntro
 {
     public class Ball : Sprite
     {
-        Vector2 speed;
-        Vector2 position;
-        Texture2D texture;
-        Color tint; 
+        public Vector2 speed;
 
 
         public Ball(Vector2 position, Texture2D texture, Color tint, Vector2 speed)
@@ -24,17 +21,16 @@ namespace TejMonoIntro
             this.texture = texture;
             this.tint = tint; 
         }
-        public void draw (SpriteBatch spriteBatch)
+        public override void Draw (SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();
-            spriteBatch.Draw(texture,position, tint);
-            spriteBatch.End();
+            base.Draw(spriteBatch);
         }
-        public void reset(int height, int width)
+        public void reset(int width, int height)
         {
             position.X = width / 2;
             position.Y = height / 2;
-       
+            
+        
         }
         //
 

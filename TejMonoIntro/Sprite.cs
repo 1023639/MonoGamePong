@@ -10,9 +10,9 @@ namespace TejMonoIntro
 {
     public class Sprite
     {
-        Vector2 position;
-        Texture2D texture;
-        Color tint;
+        public Vector2 position;
+        public Texture2D texture;
+        public Color tint;
         public Rectangle hitbox;
 
 
@@ -25,11 +25,14 @@ namespace TejMonoIntro
         }
         public virtual void Draw (SpriteBatch spriteBatch)
         {
+           spriteBatch.Begin();
            spriteBatch.Draw(texture, position, tint);
            hitbox = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+            spriteBatch.End(); 
         }
         public virtual void Update (GameTime gameTime)
         {
+            
             hitbox.X = (int)position.X;
             hitbox.Y = (int)position.Y;
 

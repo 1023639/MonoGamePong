@@ -10,9 +10,8 @@ namespace TejMonoIntro
 {
     class Paddle : Sprite
     {
-        Vector2 speed;
-        Vector2 position;
-        Texture2D texture;
+        public Vector2 speed;
+        public Texture2D texture;
         Color tint;
 
         public Paddle(Vector2 position, Texture2D texture, Color tint, Vector2 speed) 
@@ -23,11 +22,9 @@ namespace TejMonoIntro
             this.tint = tint;
             this.speed = speed; 
         }
-        public void draw (SpriteBatch spriteBatch)
+        public override void Draw (SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();
-            spriteBatch.Draw(texture, position, tint);
-            spriteBatch.End();
+            base.Draw(spriteBatch);
         }
     }
 }
